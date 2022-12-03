@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package wallet;
+option go_package="./src/models";
+
+message Deposit {
+    int32 wallet = 1;
+    float amount = 2;
+}

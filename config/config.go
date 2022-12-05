@@ -9,3 +9,7 @@ func ReadConfig(configFile string) error {
 	config.AddConfigPath(".")
 	return config.ReadInConfig()
 }
+
+func GetConfig() *viper.Viper {
+	return config
+}

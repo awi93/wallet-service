@@ -1,9 +1,12 @@
 syntax = "proto3";
 
+import "google/protobuf/Timestamp.proto";
+
 package wallet;
-option go_package="./src/models";
+option go_package="./src/models/deposit";
 
 message Deposit {
     int32 wallet_id = 1;
     float amount = 2;
+    google.protobuf.Timestamp deposit_time = 3;
 }

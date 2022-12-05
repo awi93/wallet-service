@@ -1,2 +1,13 @@
+threshold:
+  period_window: 2
+  limit: 10000
+
+deposit:
+  topic: "deposit"
+
 broker:
-  hosts: "localhost:9092"
+  hosts: 
+    - "localhost:9092"
+
+http:
+  port: "80"

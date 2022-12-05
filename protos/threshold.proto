@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package wallet;
+option go_package="./src/models/threshold";
+
+message Threshold {
+    int32 wallet_id = 1;
+    float total_deposit = 2;
+    string latest_deposit_period = 3;
+    bool is_above_threshold = 4;
+}

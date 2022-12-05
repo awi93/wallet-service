@@ -2,6 +2,7 @@ package threshold
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"time"
 
@@ -11,6 +12,7 @@ import (
 )
 
 func (t *service) ProcessCallback(ctx goka.Context, msg interface{}) {
+	log.Println("Receiving New Message")
 	var s *threshold.Threshold
 	var deposit = msg.(*deposit.Deposit)
 	if v := ctx.Value(); v == nil {

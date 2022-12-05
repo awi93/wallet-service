@@ -2,8 +2,9 @@ package threshold
 
 import (
 	"context"
+	"log"
 
-	bootstrap "github.com/awi93/wallet-service/config"
+	config "github.com/awi93/wallet-service/config"
 	depositModel "github.com/awi93/wallet-service/src/models/deposit"
 	thresholdModel "github.com/awi93/wallet-service/src/models/threshold"
 	"github.com/awi93/wallet-service/src/processors/threshold"
@@ -15,11 +16,15 @@ var ThresholdProcessor = &cobra.Command{
 	Use:   "threshold-processor",
 	Short: "Deposit Threshold Processor",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		bootstrap.ReadConfig("config.yml")
-		threshold.InitDependency(bootstrap.GetConfig())
+		log.Println("Reading Configuration File")
+		config.ReadConfig("config.yml")
+		log.Println("Configuration File Read")
+		log.Println("Initializing Dependency")
+		threshold.InitDependency(config.GetConfig())
+		log.Println("Dependency Initialized")
 
 		return (func() error {
-			config := bootstrap.GetConfig()
+			config := config.GetConfig()
 			var topic = goka.Stream(config.GetString("deposit.topic"))
 			g := goka.DefineGroup(
 				thresholdModel.Group,
@@ -30,6 +35,7 @@ var ThresholdProcessor = &cobra.Command{
 			if err != nil {
 				return err
 			}
+			log.Printf("Start Streaming Kafka Event at Topic : %s\n", topic)
 			return p.Run(context.Background())
 		})()
 	},

@@ -1,12 +1,15 @@
 package balance
 
 import (
+	"log"
+
 	"github.com/awi93/wallet-service/src/models/balance"
 	"github.com/awi93/wallet-service/src/models/deposit"
 	"github.com/lovoo/goka"
 )
 
 func (s *service) ProcessCallback(ctx goka.Context, msg interface{}) {
+	log.Println("Receiving New Message")
 	var b *balance.Balance
 	var deposit = msg.(*deposit.Deposit)
 	if v := ctx.Value(); v == nil {

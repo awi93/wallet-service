@@ -29,6 +29,7 @@ func (s *service) GetWallet(walletId string) (*dtos.Wallet, error) {
 	}
 
 	wallet = &dtos.Wallet{
+		WalletId:       int(b.(*balance.Balance).WalletId),
 		Balance:        b.(*balance.Balance).Amount,
 		AboveThreshold: AboveThreshold,
 	}
